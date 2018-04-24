@@ -1,5 +1,6 @@
 .frontPage {
   height:900px;
+
 }
 .dirtyDishes {
   height:750px;
@@ -8,4 +9,10 @@
 }
 #second {
   height: 500px;
+  display:flex;
+  justify-content: center;
+}
+.pplNames {
+  flex-direction: row-reverse;
+
 }
