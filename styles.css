@@ -1,11 +1,11 @@
 .frontPage {
-  height:1000px;
+  height:900px;
 }
 .dirtyDishes {
   height:750px;
   width: 1125px;
   border-radius: 15px;
 }
-.secondPage {
-  height: 1000px;
+#second {
+  height: 500px;
 }
