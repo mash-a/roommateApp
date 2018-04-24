@@ -10,7 +10,7 @@
 #second {
   height: 500px;
   display:flex;
-  justify-content: center;
+  justify-content: space-around;
 }
 .pplNames {
   flex-direction: row-reverse;

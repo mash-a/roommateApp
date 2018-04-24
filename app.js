@@ -2,58 +2,69 @@ window.addEventListener('load', event => {
   console.log("Passive Aggressive App UPPP in da house");
   const baseURL = 'http://localhost:3004/roommates/';
   const frontPage = document.querySelector(".frontPage");
-  let getWorkBtn = document.querySelector(".getTheWork");
   const secondPg = document.querySelector(".secondPage");
+  const leftSide = document.querySelector(".leftSide");
+  const rightSide = document.querySelector(".rightSide");
+  const getWorkBtn = document.querySelector(".getTheWork");
+  const listOfTasks = document.querySelector(".listOfTasks");
   getWorkBtn.addEventListener("click", () => {
     event.preventDefault();
     secondPg.setAttribute("id", "second");
+    getWorkBtn.disabled = true;
     const choreForm = document.createElement("form");
+    getAllTasks();
     choreForm.innerHTML = `
       <h6>Create Your Task Table<h6>
-      <label>No. of Folx</label>
+      <label>Name</label>
       <br>
-      <input type="text" id="numberOfPeople"/>
+      <input type="text" id="personName"/>
       <br><br>
-      <label>No. of Tasks<label>
+      <label>Task<label>
       <br>
-      <input type="text" id="numberOfTasks" />
+      <input type="text" id="taskName" />
       <br><br>
-      <button id="createTaskForm">Submit</button>`
-      secondPg.appendChild(choreForm);
+      <label>Frequency<label>
+      <br>
+      <input type="text" id="frequency" />
+      <br><br>
+      <label>Due Date<label>
+      <br>
+      <input type="text" id="date" />
+      <br><br>
+      <button id="createTaskTable">Submit</button>
+      `
+      rightSide.appendChild(choreForm);
       choreForm.scrollIntoView();
-      let createTaskBtn = document.querySelector("#createTaskForm");
-      createTaskBtn.addEventListener("click", () => {
-        event.preventDefault();
-        let numOfPPL = document.querySelector("#numberOfPeople").value;
-        let numOfTasks = document.querySelector("#numberOfTasks").value;
-        choreForm.innerHTML = "";
-        createForm(numOfPPL, numOfTasks);
-      })
+      let createTaskTable = document.querySelector("#createTaskTable");
+        createTaskTable.addEventListener("click", (event) => {
+          console.log("new task?")
+          event.preventDefault();
+          createTask();
+        })
   })
+  const getAllTasks = () => {
+    axios.get(baseURL)
+      .then (response => {
+        listOfTasks.innerHTML = "";
+        response.data.forEach(elem => {
+          let taskItem = document.createElement('li');
+          taskItem.innerHTML = `${elem.task_name} (${elem.name})`;
+          listOfTasks.appendChild(taskItem);
+        })
+      })
+      .catch(error => {console.error(error);});
+  }
+  const createTask = () => {
+    console.log("is this being called?")
+    const name = document.getElementById("personName").value;
+    const task_name = document.getElementById("taskName").value;
+    const frequency = document.getElementById("frequency").value;
+    const due_date = document.getElementById("date").value;
+      axios.post(`${baseURL}`, {name, task_name, frequency, due_date})
+      .then(response => {
+        getAllTasks();
+      })
+      .catch(error => {console.error(error);});
 
-  const createForm = (numPPL, numTasks) => {
-    frontPage.removeChild(getWorkBtn);
-    let finalForm = document.createElement("form");
-    finalForm.innerHTML = `<class="finalForm"><h4>Enter Names<h4>`
-    for(let i = 0; i < numPPL; i++) {
-      let pplNames = document.createElement("input");
-      pplNames.innerHTML = `<class="pplNames">`
-      finalForm.appendChild(pplNames);
-      finalForm.appendChild(document.createElement('BR'));
-      finalForm.appendChild(document.createElement('BR'));
-    }
-    finalForm.appendChild(document.createElement('BR'));
-    finalForm.innerHTML += `<h4>Enter Tasks</h4>`
-    for(let j = 0; j < numTasks; j++){
-      let taskNames = document.createElement("input");
-      taskNames.innerHTML = `<class="taskNames">`
-      finalForm.appendChild(taskNames);
-      finalForm.appendChild(document.createElement('BR'));
-      finalForm.appendChild(document.createElement('BR'));
-    }
-    let submitFinalFormBtn = document.createElement("button");
-    submitFinalFormBtn.innerHTML = `<class="submitFinalFormBtn"> Submit`
-    finalForm.appendChild(submitFinalFormBtn);
-    secondPg.appendChild(finalForm);
   }
 })
