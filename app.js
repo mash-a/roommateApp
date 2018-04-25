@@ -7,7 +7,8 @@ window.addEventListener('load', event => {
   const listOfTasks = document.querySelector(".listOfTasks");
   const leftSide = document.querySelector(".leftSide");
   const rightSide = document.querySelector(".rightSide");
-
+  const uniqueID = document.querySelector(".iD");
+  let sessionID;
   const randomNumber = () => {
     let number = Math.random().toString(36).slice(2, 8);
     return number;
@@ -15,6 +16,7 @@ window.addEventListener('load', event => {
 
   getWorkBtn.addEventListener("click", (event) => {
     event.preventDefault();
+    getWorkBtn.disabled = true;
     secondPg.setAttribute("id", "second");
     rightSide.innerHTML = `Create New Task Table<button class="newTaskTableBtn">Create</button> or Enter Code to edit existing Task Table <input id="code" type="integer"><button class="editExistingTableCode">Submit</button>`
     secondPg.scrollIntoView();
@@ -22,6 +24,7 @@ window.addEventListener('load', event => {
 
     createNewTaskTable.addEventListener("click", (event) => {
       event.preventDefault();
+
       const choreForm = document.createElement("form");
       choreForm.innerHTML = `
         <h6>Create Your Task Table<h6>
@@ -45,9 +48,14 @@ window.addEventListener('load', event => {
         `
         rightSide.innerHTML = "";
         rightSide.appendChild(choreForm);
+        leftSide.appendChild(uniqueID);
+        sessionID = randomNumber();
+
+        uniqueID.innerHTML = `Code to access your session again: ${sessionID}`;
         getAllTasks();
     })
   })
+  console.log(uniqueID.innerHTML);
 
   const getAllTasks = () => {
     axios.get(baseURL)
