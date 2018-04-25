@@ -30,8 +30,10 @@ window.addEventListener('load', event => {
       event.preventDefault;
       editTasks(code);
       rightSide.innerHTML = "";
+      addTaskToExisting(code);
     })
     const createNewTaskTable = document.querySelector(".newTaskTableBtn");
+
     createNewTaskTable.addEventListener("click", (event) => {
       event.preventDefault();
       const choreForm = document.createElement("form");
@@ -87,10 +89,16 @@ window.addEventListener('load', event => {
           }
         })
         let finishedButton = document.createElement("button");
+        let editButton = document.createElement("button");
         finishedButton.innerHTML = `<class="delete">Finished a task?`;
+        editButton.innerHTML = `<class="edit">Edit`;
         listOfTasks.appendChild(finishedButton);
+        listOfTasks.appendChild(editButton);
         on("click", finishedButton, () => {
           deleteTasks(individualID, id);
+        })
+        on("click", editButton, () => {
+
         })
       })
       .catch(error => {console.error(error);});
@@ -116,7 +124,9 @@ window.addEventListener('load', event => {
   const editTasks = (id) => {
     uniqueID.innerHTML = `${id}`;
     getAllTasks(id);
+    addTaskToExisting(id);
   }
+
   const deleteTasks = (one_id, all_id) => {
     axios.delete(`${baseURL}${one_id}`)
       .then(result => {
@@ -126,7 +136,39 @@ window.addEventListener('load', event => {
       .catch(error => {console.error(error);})
   };
 
+  const addTaskToExisting = (id) => {
+    const choreForm = document.createElement("form");
+    choreForm.innerHTML = `
+      <h6>Add a task<h6>
+      <label>Name</label>
+      <br>
+      <input type="text" id="personName"/>
+      <br><br>
+      <label>Task<label>
+      <br>
+      <input type="text" id="taskName" />
+      <br><br>
+      <label>Frequency<label>
+      <br>
+      <input type="text" id="frequency" />
+      <br><br>
+      <label>Due Date<label>
+      <br>
+      <input type="text" id="date" />
+      <br><br>
+      <button id="createTaskTable">Submit</button>
+      `
+      rightSide.appendChild(choreForm);
+      createTaskTable = document.querySelector("#createTaskTable");
+      on("click", createTaskTable, (event) => {
+        event.preventDefault();
+        createTask(id);
+      });
+  }
 
+  const updateTask = (id) => {
+    
+  }
 
   const on = (evt, item, cb) => {
     item.addEventListener(evt, cb);
