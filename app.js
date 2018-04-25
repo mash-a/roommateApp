@@ -9,6 +9,8 @@ window.addEventListener('load', event => {
   const rightSide = document.querySelector(".rightSide");
   const uniqueID = document.querySelector(".iD");
   let sessionID;
+  let createTaskTable;
+
   const randomNumber = () => {
     let number = Math.random().toString(36).slice(2, 8);
     return number;
@@ -50,37 +52,45 @@ window.addEventListener('load', event => {
         rightSide.appendChild(choreForm);
         leftSide.appendChild(uniqueID);
         sessionID = randomNumber();
-
+        createTaskTable = document.querySelector("#createTaskTable");
+        on("click", createTaskTable, (event) => {
+          event.preventDefault();
+          createTask(sessionID);
+        })
         uniqueID.innerHTML = `Code to access your session again: ${sessionID}`;
         getAllTasks();
     })
   })
   console.log(uniqueID.innerHTML);
 
-  const getAllTasks = () => {
+  const getAllTasks = (id) => {
     axios.get(baseURL)
       .then (response => {
         listOfTasks.innerHTML = "";
         response.data.forEach(elem => {
+         if(elem.unique_id === id){
           let taskItem = document.createElement('li');
           taskItem.innerHTML = `${elem.task_name} (${elem.due_date})<input id="checkBox" type="checkbox">`;
           listOfTasks.appendChild(taskItem);
-        })
+          }
           let finishedButton = document.createElement("button");
           finishedButton.innerHTML = "Finished a task?";
           listOfTasks.appendChild(finishedButton);
+        })
       })
       .catch(error => {console.error(error);});
   }
- const createTask = () => {
+
+ const createTask = (id) => {
     console.log("is this being called?")
     const name = document.getElementById("personName").value;
     const task_name = document.getElementById("taskName").value;
     const frequency = document.getElementById("frequency").value;
     const due_date = document.getElementById("date").value;
-    axios.post(`${baseURL}`, {name, task_name, frequency, due_date})
+    let unique_id = id;
+    axios.post(`${baseURL}`, {name, task_name, frequency, due_date, unique_id})
       .then(response => {
-        getAllTasks();
+        getAllTasks(unique_id);
          document.getElementById("personName").value = "";
          document.getElementById("taskName").value = "";
          document.getElementById("frequency").value = "";
@@ -97,13 +107,4 @@ window.addEventListener('load', event => {
     item.addEventListener(evt, cb);
   }
 
-
-
-    // let createTaskTable = document.querySelector("#createTaskTable");
-    //
-    //   createTaskTable.addEventListener("click", (event) => {
-    //     console.log("new task?")
-    //     event.preventDefault();
-    //     createTask();
-    //   })
 })
