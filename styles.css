@@ -1,22 +1,31 @@
 body {
   background-color: #efefef;
+  height: auto;
+}
+.container-fluid{
+  padding: 0;
+}
+.container {
+  box-shadow: 3px 3px 5px  #ccc;
+  height: 100vh;
 }
 .frontPage {
-  height:900px;
-  display: flex;
-}
-.dirtyDishes {
-  height:750px;
-  width: 1125px;
-  border-radius: 15px;
+  height: 850px;
+  background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.53)), url(imgs/dirtydishes.jpg);
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 #secondPg {
   height: 500px;
-  display:flex;
-  justify-content: space-around;
 }
-.table {
-  style: overflow-x:auto;
+.bottomRow{
+  display: inline-flex;
+  justify-content: center;
+}
+#pageThree {
+  height: 600px;
 }
 button {
   color:

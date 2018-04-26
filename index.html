@@ -14,34 +14,43 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="container-fluid">
     <section class="frontPage">
-      <img src="./imgs/dirtydishes.jpg" alt="dirty dishes" class="dirtyDishes">
+      <!-- <img src="./imgs/dirtydishes.jpg" alt="dirty dishes" class="dirtyDishes"> -->
       <h1>The RoomMate App</h1>
       <h6>Share the workload</h6>
-      <button class="getTheWork">get yo housework done</button>
+      <button class="getTheWork btn btn-dark">get yo housework done</button>
     </section>
+    </div>
 
+  <div class="container">
     <section class="secondPage">
-      <div class="row topRow">
-      <div class="col-sm-6">
-      <div class="leftSide">
-        <p class="iD"></p>
-        <ul class="listOfTasks"></ul>
+      <div class="row">
+        <div class="col-sm">
+          <div class="leftSide">
+            <p class="iD"></p>
+            <ul class="listOfTasks"></ul>
+          </div>
+        </div>
+
+        <div class="middle"></div>
+
+        <div class="col-sm">
+          <div class="rightSide"></div>
+        </div>
       </div>
+
+      <div class="row">
+        <div class="bottomRow col p-5"></div>
       </div>
-      <div class="middle"></div>
-      <div class="col-sm-6">
-      <div class="rightSide"></div>
-      </div>
-      </div>
-      <div class="row bottomRow"></div>
+
     </section>
     <section class="thirdPage">
       <div class="table">
-        <table></table>
+        <table class="table"></table>
       </div>
     </section>
+  </div>
   </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

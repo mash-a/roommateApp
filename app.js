@@ -1,5 +1,4 @@
 window.addEventListener('load', event => {
-  console.log("Passive Aggressive App UPPP in da house");
   const baseURL = 'http://localhost:3004/roommates/';
   const frontPage = document.querySelector(".frontPage");
   const secondPg = document.querySelector(".secondPage");
@@ -11,8 +10,7 @@ window.addEventListener('load', event => {
   const bottomRow = document.querySelector(".bottomRow");
   const thirdPg = document.querySelector(".thirdPage");
   const visualize = document.createElement("button");
-  visualize.innerHTML = `<class="visualizeData">Visualize`;
-
+  visualize.innerHTML = `<class="visualizeData btn btn-dark">Visualize`;
   let createTaskTable;
   let codeEditButton;
 
@@ -91,7 +89,6 @@ window.addEventListener('load', event => {
     bottomRow.appendChild(visualize);
     on("click", visualize, (event) => {
       event.preventDefault();
-      console.log("squuzing")
       let newID = id;
       createTable(newID);
     })
@@ -112,7 +109,6 @@ window.addEventListener('load', event => {
 
           }
         })
-
         let finishedButton = document.createElement("button");
         let editButton = document.createElement("button");
         finishedButton.innerHTML = `<class="delete">Finished a task?`;
@@ -126,9 +122,7 @@ window.addEventListener('load', event => {
         on("click", editButton, (event) => {
           event.preventDefault();
           editTask(editElem, individualID, id);
-          console.log("clicking the edit button")
         })
-
       })
       .catch(error => {console.error(error);});
   }
@@ -265,9 +259,8 @@ window.addEventListener('load', event => {
   }
 
   const createTable = (unique_iD) => {
-   let visualTable = document.createElement("table");
+   let visualTable = document.querySelector("table");
     visualTable.innerHTML = `
-    <table class="table table-dark">
       <thead>
         <tr>
           <th scope="col">Name</th>
@@ -276,38 +269,27 @@ window.addEventListener('load', event => {
           <th scope="col">Due Date</th>
         </tr>
       </thead>
-      <tbody class="tableBody">
-      </tbody>
-    </table>
     `
-
-    console.log("calling create table", unique_iD)
-    let tableBody = document.querySelector(".tableBody");
+    let tableBody = document.createElement("tbody");
+    visualTable.appendChild(tableBody)
     axios.get(baseURL)
       .then(response => {
-          response.data.forEach(elem => {
-            if(elem.unique_id === unique_iD){
-            console.log(elem)
+        response.data.forEach(elem => {
+          if(elem.unique_id === unique_iD){
             let tableRow = document.createElement("tr");
             tableRow.innerHTML = `
               <th scope="row">${elem.name}</th>
               <td>${elem.task_name}</td>
-              <td>"${elem.frequency}"</td>
-              <td>"${elem.due_date}"</td>
-            `
-            let newRow = tableBody.insertRow(tableBody.rows.length);
-            let newCell = newRow.insertCell();
-            newCell.appendChild(tableRow);
-
+              <td>${elem.frequency}</td>
+              <td>${elem.due_date}</td>
+              `
+            tableBody.appendChild(tableRow)
           }
-          thirdPg.appendChild(visualTable);
+          thirdPg.setAttribute("id", "pageThree")
           visualTable.scrollIntoView();
-
         })
-
       })
-      .catch(error => {console.error(error)});
+    .catch(error => {console.error(error)});
   }
-
 
 })
