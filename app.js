@@ -97,8 +97,8 @@ window.addEventListener('load', event => {
         on("click", finishedButton, () => {
           deleteTasks(individualID, id);
         })
-        on("click", editButton, () => {
-
+        on("click", editButton, (event) => {
+          editTask(event.target)
         })
       })
       .catch(error => {console.error(error);});
@@ -166,8 +166,28 @@ window.addEventListener('load', event => {
       });
   }
 
-  const updateTask = (id) => {
-    
+  const editTask = (task) => {
+    const choreForm = document.createElement("form");
+    choreForm.innerHTML = `
+      <h6>Add a task<h6>
+      <label>Name</label>
+      <br>
+      <input type="text" id="personName" value="${task.name}"/>
+      <br><br>
+      <label>Task<label>
+      <br>
+      <input type="text" id="taskName" value="${task.task_name}"/>
+      <br><br>
+      <label>Frequency<label>
+      <br>
+      <input type="text" id="frequency" value="${task.frequency}"/>
+      <br><br>
+      <label>Due Date<label>
+      <br>
+      <input type="text" id="date" value="${task.due_date}"/>
+      <br><br>
+      <button id="createTaskTable">Submit</button>
+      `
   }
 
   const on = (evt, item, cb) => {
