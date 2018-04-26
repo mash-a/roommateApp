@@ -1,13 +1,17 @@
-body, form{
-  background-color: #e3dfe5 !important;
+body {
+  background-color: #fffefc;
+  font-family: 'Eczar', serif;
 }
 .container-fluid{
   padding: 0;
 
 }
+.container, .table {
+  background-color: #e3dfe5 !important;
+}
 
 .frontPage {
-  height: 950px;
+  height: 100vh;
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.53)), url(imgs/dirtydishes.jpg);
   background-attachment: fixed;
   background-position: center;
@@ -25,6 +29,7 @@ body, form{
 }
 #pageThree {
   height: 600px;
+  box-shadow: 5px 3px 5px 2px #ccc;
 }
 button {
   background-color:black !important;

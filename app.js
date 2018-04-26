@@ -290,7 +290,7 @@ window.addEventListener('load', event => {
             tableBody.appendChild(tableRow)
           }
           thirdPg.setAttribute("id", "pageThree")
-          visualTable.scrollIntoView();
+          thirdPg.scrollIntoView();
         })
       })
     .catch(error => {console.error(error)});
