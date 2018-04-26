@@ -72,6 +72,7 @@ window.addEventListener('load', event => {
 
   const getAllTasks = (id) => {
     let individualID;
+    let editElem;
     axios.get(baseURL)
       .then (response => {
         listOfTasks.innerHTML = "";
@@ -83,7 +84,7 @@ window.addEventListener('load', event => {
             let radioBtn = event.target.firstElementChild;
             radioBtn.checked = true;
             individualID = elem.id
-            console.log(individualID)
+            editElem = elem;
           })
           listOfTasks.appendChild(taskItem);
           }
@@ -94,11 +95,14 @@ window.addEventListener('load', event => {
         editButton.innerHTML = `<class="edit">Edit`;
         listOfTasks.appendChild(finishedButton);
         listOfTasks.appendChild(editButton);
-        on("click", finishedButton, () => {
+        on("click", finishedButton, (event) => {
+          event.preventDefault();
           deleteTasks(individualID, id);
         })
         on("click", editButton, (event) => {
-          editTask(event.target)
+          event.preventDefault();
+          editTask(editElem, individualID, id);
+          console.log("clicking the edit button")
         })
       })
       .catch(error => {console.error(error);});
@@ -158,6 +162,7 @@ window.addEventListener('load', event => {
       <br><br>
       <button id="createTaskTable">Submit</button>
       `
+      rightSide.innerHTML = "";
       rightSide.appendChild(choreForm);
       createTaskTable = document.querySelector("#createTaskTable");
       on("click", createTaskTable, (event) => {
@@ -166,9 +171,9 @@ window.addEventListener('load', event => {
       });
   }
 
-  const editTask = (task) => {
-    const choreForm = document.createElement("form");
-    choreForm.innerHTML = `
+  const editTask = (task, id) => {
+    const editChoreForm = document.createElement("form");
+    editChoreForm.innerHTML = `
       <h6>Add a task<h6>
       <label>Name</label>
       <br>
@@ -186,9 +191,28 @@ window.addEventListener('load', event => {
       <br>
       <input type="text" id="date" value="${task.due_date}"/>
       <br><br>
-      <button id="createTaskTable">Submit</button>
+      <button id="editTaskTable">Donezo</button>
       `
+      rightSide.innerHTML = "";
+      rightSide.appendChild(editChoreForm);
+      let submitBtn = document.querySelector("#editTaskTable");
+      on("click", submitBtn, (event) => {
+        event.preventDefault();
+        const newName = document.querySelector("#personName").value;
+        const newTask = document.querySelector("#taskName").value;
+        const newFrequency = document.querySelector("#frequency").value;
+        const newDate = document.querySelector("#date").value;
+        const newData = {name: newName, task_name: newTask, frequency:newFrequency, due_date: newDate};
+        axios.put(`${baseURL}${id}`, newData)
+          .then(result => {
+            let allID = result.data.unique_id;
+            addTaskToExisting(allID);
+            getAllTasks(allID);
+          })
+          .catch(error => {console.error(error);});
+      })
   }
+
 
   const on = (evt, item, cb) => {
     item.addEventListener(evt, cb);
