@@ -14,12 +14,15 @@ window.addEventListener('load', event => {
   let createTaskTable;
   let codeEditButton;
   const create = document.querySelector(".create");
+  const home = document.querySelector("#home")
 
   const randomNumber = () => {
     let number = Math.random().toString(36).slice(2, 8);
     return number;
   }
-
+  const on = (evt, item, cb) => {
+    item.addEventListener(evt, cb);
+  }
   getWorkBtn.addEventListener("click", (event) => {
     event.preventDefault();
     getWorkBtn.disabled = true;
@@ -258,9 +261,7 @@ window.addEventListener('load', event => {
       })
   }
 
-  const on = (evt, item, cb) => {
-    item.addEventListener(evt, cb);
-  }
+
 
   const createTable = (unique_iD) => {
    let visualTable = document.querySelector("table");
