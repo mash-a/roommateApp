@@ -46,7 +46,7 @@ window.addEventListener('load', event => {
       <div class="form-group row">
       <label class="col-sm-3 col-form-label">Name</label>
       <div class="col-sm-6">
-      <input type="text" id="personName" class="form-control" placeholder="Name">
+      <input type="text" id="personName" class="form-control">
       </div>
       </div>
       <div class="form-group row">
@@ -169,7 +169,7 @@ window.addEventListener('load', event => {
     <div class="form-group row">
     <label class="col-sm-3 col-form-label">Name</label>
     <div class="col-sm-6">
-    <input type="text" id="personName" class="form-control" placeholder="Name">
+    <input type="text" id="personName" class="form-control">
     </div>
     </div>
     <div class="form-group row">
@@ -195,6 +195,7 @@ window.addEventListener('load', event => {
     </div>
     </div>
       `
+      create.innerHTML = "";
       rightSide.innerHTML = "";
       rightSide.appendChild(choreForm);
       createTaskTable = document.querySelector("#createTaskTable");

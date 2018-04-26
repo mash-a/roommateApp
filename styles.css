@@ -1,4 +1,6 @@
-
+body, form{
+  background-color: #e3dfe5 !important;
+}
 .container-fluid{
   padding: 0;
 
@@ -11,10 +13,11 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  color: #efefef;
 }
 #secondPg {
   height: 500px;
-  box-shadow: 3px 3px 5px  #ccc;
+  box-shadow: 5px 3px 5px 2px #ccc;
 }
 .bottomRow{
   display: inline-flex;
@@ -24,5 +27,8 @@
   height: 600px;
 }
 button {
-  color:
+  background-color:black !important;
+  border: black !important;
+  border-radius: 10px;
+  color: white;
 }
