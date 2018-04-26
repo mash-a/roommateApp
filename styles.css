@@ -1,16 +1,11 @@
-body {
-  background-color: #efefef;
-  height: auto;
-}
+
 .container-fluid{
   padding: 0;
+
 }
-.container {
-  box-shadow: 3px 3px 5px  #ccc;
-  height: 100vh;
-}
+
 .frontPage {
-  height: 850px;
+  height: 950px;
   background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.53)), url(imgs/dirtydishes.jpg);
   background-attachment: fixed;
   background-position: center;
@@ -19,6 +14,7 @@ body {
 }
 #secondPg {
   height: 500px;
+  box-shadow: 3px 3px 5px  #ccc;
 }
 .bottomRow{
   display: inline-flex;

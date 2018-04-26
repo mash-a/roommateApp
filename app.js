@@ -13,6 +13,7 @@ window.addEventListener('load', event => {
   visualize.innerHTML = `<class="visualizeData btn btn-dark">Visualize`;
   let createTaskTable;
   let codeEditButton;
+  const create = document.querySelector(".create");
 
   const randomNumber = () => {
     let number = Math.random().toString(36).slice(2, 8);
@@ -24,7 +25,8 @@ window.addEventListener('load', event => {
     getWorkBtn.disabled = true;
     secondPg.setAttribute("id", "secondPg");
     secondPg.scrollIntoView();
-    rightSide.innerHTML = `Create New Task Table<button class="newTaskTableBtn">Create</button> or Enter Code to edit existing Task Table <input id="code" type="integer"><button class="editExistingTableCode">Submit</button>`
+    create.innerHTML = `<div class="row">Create New Task Table</div><div class="row"><button class="newTaskTableBtn btn btn-dark">Create</button></div>`
+    rightSide.innerHTML = ` Enter Code to edit existing Task Table <input id="code" type="integer"><button class="editExistingTableCode btn btn-dark">Submit</button>`
     codeEditButton = document.querySelector(".editExistingTableCode");
 
     on("click", codeEditButton, (event) => {
@@ -66,10 +68,11 @@ window.addEventListener('load', event => {
       </div>
       </div>
       <div class="form-group row">
-      <button id="createTaskTable">Submit</button>
+      <button id="createTaskTable" class="btn btn-dark">Submit</button>
       </div>
       </div>
         `
+        create.innerHTML = "";
         rightSide.innerHTML = "";
         rightSide.appendChild(choreForm);
         leftSide.appendChild(uniqueID);
@@ -111,8 +114,8 @@ window.addEventListener('load', event => {
         })
         let finishedButton = document.createElement("button");
         let editButton = document.createElement("button");
-        finishedButton.innerHTML = `<class="delete">Finished a task?`;
-        editButton.innerHTML = `<class="edit">Edit`;
+        finishedButton.innerHTML = `<class="delete btn btn-dark">Finished a task?`;
+        editButton.innerHTML = `<class="edit btn btn-dark">Edit`;
         listOfTasks.appendChild(finishedButton);
         listOfTasks.appendChild(editButton);
         on("click", finishedButton, (event) => {
@@ -188,7 +191,7 @@ window.addEventListener('load', event => {
     </div>
     </div>
     <div class="form-group row">
-    <button id="createTaskTable">Submit</button>
+    <button id="createTaskTable" class="btn btn-dark">Submit</button>
     </div>
     </div>
       `
@@ -230,7 +233,7 @@ window.addEventListener('load', event => {
     </div>
     </div>
     <div class="form-group row">
-    <button id="editTaskTable">Donezo</button>
+    <button id="editTaskTable" class="">Donezo</button>
     </div>
     </div>
     `
