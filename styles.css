@@ -1,6 +1,9 @@
+body {
+  background-color: #efefef;
+}
 .frontPage {
   height:900px;
-
+  display: flex;
 }
 .dirtyDishes {
   height:750px;
@@ -11,4 +14,10 @@
   height: 500px;
   display:flex;
   justify-content: space-around;
+}
+.table {
+  style: overflow-x:auto;
+}
+button {
+  color:
 }

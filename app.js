@@ -8,6 +8,10 @@ window.addEventListener('load', event => {
   const leftSide = document.querySelector(".leftSide");
   const rightSide = document.querySelector(".rightSide");
   const uniqueID = document.querySelector(".iD");
+  const bottomRow = document.querySelector(".bottomRow");
+  const thirdPg = document.querySelector(".thirdPage");
+  const visualize = document.createElement("button");
+  visualize.innerHTML = `<class="visualizeData">Visualize`;
 
   let createTaskTable;
   let codeEditButton;
@@ -38,24 +42,35 @@ window.addEventListener('load', event => {
       event.preventDefault();
       const choreForm = document.createElement("form");
       choreForm.innerHTML = `
-        <h6>Add a task<h6>
-        <label>Name</label>
-        <br>
-        <input type="text" id="personName"/>
-        <br><br>
-        <label>Task<label>
-        <br>
-        <input type="text" id="taskName" />
-        <br><br>
-        <label>Frequency<label>
-        <br>
-        <input type="text" id="frequency" />
-        <br><br>
-        <label>Due Date<label>
-        <br>
-        <input type="text" id="date" />
-        <br><br>
-        <button id="createTaskTable">Submit</button>
+      <h6>Add a task</h6>
+      <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Name</label>
+      <div class="col-sm-6">
+      <input type="text" id="personName" class="form-control" placeholder="Name">
+      </div>
+      </div>
+      <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Task</label>
+      <div class="col-sm-6">
+      <input type="text" id="taskName" class="form-control">
+      </div>
+      </div>
+      <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Frequency</label>
+      <div class="col-sm-6">
+      <input type="text" id="frequency" class="form-control">
+      </div>
+      </div>
+      <div class="form-group row">
+      <label class="col-sm-3 col-form-label">Due Date</label>
+      <div class="col-sm-6">
+      <input type="text" id="date" class="form-control">
+      </div>
+      </div>
+      <div class="form-group row">
+      <button id="createTaskTable">Submit</button>
+      </div>
+      </div>
         `
         rightSide.innerHTML = "";
         rightSide.appendChild(choreForm);
@@ -73,7 +88,14 @@ window.addEventListener('load', event => {
   const getAllTasks = (id) => {
     let individualID;
     let editElem;
-    axios.get(baseURL)
+    bottomRow.appendChild(visualize);
+    on("click", visualize, (event) => {
+      event.preventDefault();
+      console.log("squuzing")
+      let newID = id;
+      createTable(newID);
+    })
+      axios.get(baseURL)
       .then (response => {
         listOfTasks.innerHTML = "";
         response.data.forEach(elem => {
@@ -87,8 +109,10 @@ window.addEventListener('load', event => {
             editElem = elem;
           })
           listOfTasks.appendChild(taskItem);
+
           }
         })
+
         let finishedButton = document.createElement("button");
         let editButton = document.createElement("button");
         finishedButton.innerHTML = `<class="delete">Finished a task?`;
@@ -104,6 +128,7 @@ window.addEventListener('load', event => {
           editTask(editElem, individualID, id);
           console.log("clicking the edit button")
         })
+
       })
       .catch(error => {console.error(error);});
   }
@@ -143,24 +168,35 @@ window.addEventListener('load', event => {
   const addTaskToExisting = (id) => {
     const choreForm = document.createElement("form");
     choreForm.innerHTML = `
-      <h6>Add a task<h6>
-      <label>Name</label>
-      <br>
-      <input type="text" id="personName"/>
-      <br><br>
-      <label>Task<label>
-      <br>
-      <input type="text" id="taskName" />
-      <br><br>
-      <label>Frequency<label>
-      <br>
-      <input type="text" id="frequency" />
-      <br><br>
-      <label>Due Date<label>
-      <br>
-      <input type="text" id="date" />
-      <br><br>
-      <button id="createTaskTable">Submit</button>
+    <h6>Add a task</h6>
+    <div class="form-group row">
+    <label class="col-sm-3 col-form-label">Name</label>
+    <div class="col-sm-6">
+    <input type="text" id="personName" class="form-control" placeholder="Name">
+    </div>
+    </div>
+    <div class="form-group row">
+    <label class="col-sm-3 col-form-label">Task</label>
+    <div class="col-sm-6">
+    <input type="text" id="taskName" class="form-control">
+    </div>
+    </div>
+    <div class="form-group row">
+    <label class="col-sm-3 col-form-label">Frequency</label>
+    <div class="col-sm-6">
+    <input type="text" id="frequency" class="form-control">
+    </div>
+    </div>
+    <div class="form-group row">
+    <label class="col-sm-3 col-form-label">Due Date</label>
+    <div class="col-sm-6">
+    <input type="text" id="date" class="form-control">
+    </div>
+    </div>
+    <div class="form-group row">
+    <button id="createTaskTable">Submit</button>
+    </div>
+    </div>
       `
       rightSide.innerHTML = "";
       rightSide.appendChild(choreForm);
@@ -174,25 +210,36 @@ window.addEventListener('load', event => {
   const editTask = (task, id) => {
     const editChoreForm = document.createElement("form");
     editChoreForm.innerHTML = `
-      <h6>Add a task<h6>
-      <label>Name</label>
-      <br>
-      <input type="text" id="personName" value="${task.name}"/>
-      <br><br>
-      <label>Task<label>
-      <br>
-      <input type="text" id="taskName" value="${task.task_name}"/>
-      <br><br>
-      <label>Frequency<label>
-      <br>
-      <input type="text" id="frequency" value="${task.frequency}"/>
-      <br><br>
-      <label>Due Date<label>
-      <br>
-      <input type="text" id="date" value="${task.due_date}"/>
-      <br><br>
-      <button id="editTaskTable">Donezo</button>
-      `
+    <h6>Add a task</h6>
+    <div class="form-group row">
+    <label class="col-sm-3 col-form-label">Name</label>
+    <div class="col-sm-6">
+    <input type="text" id="personName" class="form-control"  value="${task.name}">
+    </div>
+    </div>
+    <div class="form-group row">
+    <label class="col-sm-3 col-form-label">Task</label>
+    <div class="col-sm-6">
+    <input type="text" id="taskName" class="form-control" value="${task.task_name}">
+    </div>
+    </div>
+    <div class="form-group row">
+    <label class="col-sm-3 col-form-label">Frequency</label>
+    <div class="col-sm-6">
+    <input type="text" id="frequency" class="form-control" value="${task.frequency}">
+    </div>
+    </div>
+    <div class="form-group row">
+    <label class="col-sm-3 col-form-label">Due Date</label>
+    <div class="col-sm-6">
+    <input type="text" id="date" class="form-control" value="${task.due_date}">
+    </div>
+    </div>
+    <div class="form-group row">
+    <button id="editTaskTable">Donezo</button>
+    </div>
+    </div>
+    `
       rightSide.innerHTML = "";
       rightSide.appendChild(editChoreForm);
       let submitBtn = document.querySelector("#editTaskTable");
@@ -213,11 +260,54 @@ window.addEventListener('load', event => {
       })
   }
 
-
   const on = (evt, item, cb) => {
     item.addEventListener(evt, cb);
   }
 
+  const createTable = (unique_iD) => {
+   let visualTable = document.createElement("table");
+    visualTable.innerHTML = `
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Task</th>
+          <th scope="col">Frequency</th>
+          <th scope="col">Due Date</th>
+        </tr>
+      </thead>
+      <tbody class="tableBody">
+      </tbody>
+    </table>
+    `
+
+    console.log("calling create table", unique_iD)
+    let tableBody = document.querySelector(".tableBody");
+    axios.get(baseURL)
+      .then(response => {
+          response.data.forEach(elem => {
+            if(elem.unique_id === unique_iD){
+            console.log(elem)
+            let tableRow = document.createElement("tr");
+            tableRow.innerHTML = `
+              <th scope="row">${elem.name}</th>
+              <td>${elem.task_name}</td>
+              <td>"${elem.frequency}"</td>
+              <td>"${elem.due_date}"</td>
+            `
+            let newRow = tableBody.insertRow(tableBody.rows.length);
+            let newCell = newRow.insertCell();
+            newCell.appendChild(tableRow);
+
+          }
+          thirdPg.appendChild(visualTable);
+          visualTable.scrollIntoView();
+
+        })
+
+      })
+      .catch(error => {console.error(error)});
+  }
 
 
 })
