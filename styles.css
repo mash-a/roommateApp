@@ -2,9 +2,11 @@ body {
   background-color: #ece4c8;
   font-family: 'Eczar', serif;
 }
+
 .container-fluid{
   padding: 0;
 }
+
 .container, .table {
   background-color: #f0eee7 !important;
 
@@ -23,16 +25,19 @@ body {
   background-size: cover;
   color: #efefef;
 }
+
 #secondPg {
   height: 500px;
-
 }
+
 .frontPage, #secondPg, #pageThree {
   font-size: 20px;
 }
+
 #pageThree {
   height: 600px;
 }
+
 button {
   background-color:black !important;
   border: black !important;
@@ -40,6 +45,7 @@ button {
   color: #efefef;
   font-size: 20px !important;
 }
+
 ul {
   list-style: none;
 }

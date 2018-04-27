@@ -10,7 +10,7 @@ window.addEventListener('load', event => {
   const bottomRow = document.querySelector(".bottomRow");
   const thirdPg = document.querySelector(".thirdPage");
   const visualize = document.createElement("button");
-  visualize.innerHTML = `<class="visualizeData btn btn-dark">Visualize`;
+  visualize.innerHTML = `<class="visualizeData">Visualize`;
   let createTaskTable;
   let codeEditButton;
   const create = document.querySelector(".create");
@@ -35,10 +35,14 @@ window.addEventListener('load', event => {
 
     on("click", codeEditButton, (event) => {
       let code = document.querySelector("#code").value;
+      if(!code){
+        alert("Enter a Code")
+      } else {
+        editTasks(code);
+        rightSide.innerHTML = "";
+        addTaskToExisting(code);
+      }
       event.preventDefault;
-      editTasks(code);
-      rightSide.innerHTML = "";
-      addTaskToExisting(code);
     })
     const createNewTaskTable = document.querySelector(".newTaskTableBtn");
 
