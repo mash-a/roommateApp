@@ -176,7 +176,7 @@ window.addEventListener('load', event => {
   const addTaskToExisting = (id) => {
     const choreForm = document.createElement("form");
     choreForm.innerHTML = `
-    <h6>Add a task</h6>
+    <h5>Add a task</h5>
     <div class="form-group row">
     <label class="col-sm-3 col-form-label">Name</label>
     <div class="col-sm-6">
