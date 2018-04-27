@@ -1,12 +1,17 @@
 body {
-  background-color: #fffefc;
+  background-color: #ece4c8;
   font-family: 'Eczar', serif;
 }
 .container-fluid{
   padding: 0;
 }
 .container, .table {
-  background-color: #e3dfe5 !important;
+  background-color: #f0eee7 !important;
+
+}
+
+.container {
+  box-shadow: 5px 5px 5px 3px #ccc;
 }
 
 .frontPage {
@@ -20,19 +25,21 @@ body {
 }
 #secondPg {
   height: 500px;
-  box-shadow: 5px 3px 5px 2px #ccc;
+
 }
-.bottomRow{
-  display: inline-flex;
-  justify-content: center;
+.frontPage, #secondPg, #pageThree {
+  font-size: 20px;
 }
 #pageThree {
   height: 600px;
-  box-shadow: 5px 3px 5px 2px #ccc;
 }
 button {
   background-color:black !important;
   border: black !important;
   border-radius: 10px;
   color: #efefef;
+  font-size: 20px !important;
+}
+ul {
+  list-style: none;
 }

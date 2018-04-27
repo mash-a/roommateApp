@@ -23,13 +23,14 @@ window.addEventListener('load', event => {
   const on = (evt, item, cb) => {
     item.addEventListener(evt, cb);
   }
+
   getWorkBtn.addEventListener("click", (event) => {
     event.preventDefault();
     getWorkBtn.disabled = true;
     secondPg.setAttribute("id", "secondPg");
     secondPg.scrollIntoView();
-    create.innerHTML = `<div class="row">Create New Task Table</div><div class="row"><button class="newTaskTableBtn btn btn-dark">Create</button></div>`
-    rightSide.innerHTML = ` Enter Code to edit existing Task Table <input id="code" type="integer"><button class="editExistingTableCode btn btn-dark">Submit</button>`
+    create.innerHTML = `Create New Task Table</div><div class="row"><button class="newTaskTableBtn btn btn-dark">Create</button>`
+    rightSide.innerHTML = `Enter Code to edit existing Task Table <input id="code" type="integer"><button class="editExistingTableCode btn btn-dark">Submit</button>`
     codeEditButton = document.querySelector(".editExistingTableCode");
 
     on("click", codeEditButton, (event) => {
@@ -151,7 +152,7 @@ window.addEventListener('load', event => {
   }
 
   const editTasks = (id) => {
-    uniqueID.innerHTML = `${id}`;
+    uniqueID.innerHTML = `Your code: ${id}`;
     getAllTasks(id);
     addTaskToExisting(id);
   }
