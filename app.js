@@ -16,6 +16,9 @@ window.addEventListener('load', event => {
   const create = document.querySelector(".create");
   const home = document.querySelector("#home")
 
+  home.addEventListener("click", ()=>{
+    location.reload();
+  })
   const randomNumber = () => {
     let number = Math.random().toString(36).slice(2, 8);
     return number;
