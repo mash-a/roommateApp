@@ -1,0 +1,32 @@
+{
+  "name": "chores_back_end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "knex": "node_modules/.bin/knex",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mash-a/chores_back_end.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mash-a/chores_back_end/issues"
+  },
+  "homepage": "https://github.com/mash-a/chores_back_end#readme",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "express": "^4.16.3",
+    "knex": "^0.14.6",
+    "nodemon": "^1.17.3",
+    "pg": "^7.4.1"
+  },
+  "devDependencies": {
+    "morgan": "^1.9.0"
+  }
+}
