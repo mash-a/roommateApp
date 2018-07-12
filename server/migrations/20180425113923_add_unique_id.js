@@ -1,4 +1,4 @@
-
+  
 exports.up = function(knex, Promise) {
   return knex.schema.table('chores', table => {
     table.string('unique_id');
