@@ -1,10 +1,10 @@
 # RoomMate App
 
-An application to help roommates visualize the household chores
+An application to help roommates visualize the household chores.
 
 ## Getting Started
 
-Clone this repo
+Clone this repo.
 
 ### Prerequisites
 
