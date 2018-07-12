@@ -22,7 +22,7 @@ $ cd roommateApp/server
 ```
 $ npm install
 ```
-3. Create database and run the migrations.
+3. Edit knexfile.js to include the 'postgres://localhost/roommate_db' link. Create database and run the migrations.
 ```
 $ createdb roommate_db
 $ knex migrate:latest
